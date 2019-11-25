@@ -756,7 +756,7 @@ body.open {
     overflow: visible !important;
   }
 }
-@media (max-width: 1366px) {
+@media (max-width: 1365px) {
   .nav > li.m-language {
     text-align: center;
     margin-top: 50px;
