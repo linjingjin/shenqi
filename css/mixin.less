@@ -1,0 +1,239 @@
+
+//自定义工具函数
+//用于将1200px设计稿的px高度转换为750px的rem高度
+
+@pc-w:1200;
+@moblie-w:750;
+@moblie-padding:15;			//最外层容器的内部左右间距 px为单位
+@moblie-rem-padding:@moblie-padding*.01rem;		//最外层容器的内部左右间距 rem为单位
+@grid-padding:15;			//每列的内部左右间距 px为单位
+@grid-rem-padding:@grid-padding*.01rem;			//每列的内部左右间距 rem为单位
+@scale:(@moblie-w/@pc-w)*.01rem;
+//每列的内部左右padding固定为15px时 用此函数
+.rem-h(@w, @h, @num){
+	//(图片高宽比*((减去左右两边padding的容器宽)/一行的列数 - 每一列的内部左右padding))*0.01rem
+	height:(@h/@w)*((@moblie-w - @moblie-padding * 2)/@num - @grid-padding*2)*.01rem;
+}
+//每列的内部左右padding为自定义值时 用此函数
+.rem-no-h(@w, @h, @num, @pd:0, @bd:0){
+	height:(@h/@w)*((@moblie-w - @moblie-padding * 2)/@num - @pd * 2 - @bd * 2)*.01rem;
+}
+.em (@line: 2) {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  display: -webkit-box;
+  -webkit-line-clamp: @line;
+  -webkit-box-orient: vertical;
+}
+.opacity(@num){
+	@ie : 100 * @num; 
+	opacity:@num;
+	filter:alpha(opacity=@ie);
+}
+.op-bg(@num:0.5,@c:#000){
+	@ie : 100 * @num; 
+	background:@c;
+	// background:rgba(0, 0, 0, @num);
+	filter:Alpha(opacity=@ie);
+	
+}
+.ellipsis(){
+	white-space: nowrap;
+	overflow:hidden;
+	text-overflow:ellipsis;
+	display: block;
+	width: 100%;
+}
+.transition(@type:all;@time:0.7s){
+	-webkit-transition:@type @time;
+	-moz-transition:@type @time;
+	-o-transition:@type @time;
+	-ms-transition:@type @time;
+	transition:@type @time;
+}
+.translate(@x,@y){
+	-webkit-transform:translate(@x,@y);
+	-moz-transform:translate(@x,@y);
+	-o-transform:translate(@x,@y);
+	-ms-transform:translate(@x,@y);
+	transform:translate(@x,@y);
+}
+.translateUp(@x:0, @y:-5px, @time:.4s,@z:10px){
+	.transition(all, 0);
+	&:hover{
+		.translate(@x, @y);
+		box-shadow: 0 0 @z rgba(0, 0, 0, 0.2);
+	}
+}
+
+
+.scale(@x:1,@y:1,@z:1000ms){
+	transition-duration: @z;
+    transition-timing-function: ease-out;
+	transform: scale(@x, @y);
+	-webkit-transform: scale(@x, @y);
+    -webkit-transition-duration:@z;
+    -webkit-transition-timing-function: ease-out;
+    -o-transition-duration: @z;
+    -o-transition-timing-function: ease-out;
+	-o-transform: scale(@x, @y);
+	-moz-transition-duration: @z;
+    -moz-transition-timing-function: ease-out;
+	-moz-transform: scale(@x, @y);
+	-ms-transition-duration: @z;
+    -ms-transition-timing-function: ease-out;
+	-ms-transform: scale(@x, @y);
+	&:hover{
+		transform: scale(1.2, 1.2);
+		transition-duration: 1000ms;
+		transition-timing-function: ease-out;
+		-webkit-transform: scale(1.2, 1.2);
+		-webkit-transition-duration: 1000ms;
+		-webkit-transition-timing-function: ease-out;
+		-o-transform: scale(1.2, 1.2);
+		-o-transition-duration: 1000ms;
+		-o-transition-timing-function: ease-out;
+		-moz-transform: scale(1.2, 1.2);
+		-moz-transition-duration: 1000ms;
+		-moz-transition-timing-function: ease-out;
+		-ms-transform: scale(1.2, 1.2);
+		-ms-transition-duration: 1000ms;
+		-ms-transition-timing-function: ease-out;
+	}
+
+}
+.rotate(@deg){
+	-webkit-transform:rotate(@deg);
+	-moz-transform:rotate(@deg);
+	-o-transform:rotate(@deg);
+	-ms-transform:rotate(@deg);
+	transform:rotate(@deg);
+}
+.rotateX(@deg){
+	-webkit-transform:rotateX(@deg);
+	-moz-transform:rotateX(@deg);
+	-o-transform:rotateX(@deg);
+	-ms-transform:rotateX(@deg);
+	transform:rotateX(@deg);
+}
+.rotateY(@deg){
+	-webkit-transform:rotateY(@deg);
+	-moz-transform:rotateY(@deg);
+	-o-transform:rotateY(@deg);
+	-ms-transform:rotateY(@deg);
+	transform:rotateY(@deg);
+}
+.rotateZ(@deg){
+	-webkit-transform:rotateZ(@deg);
+	-moz-transform:rotateZ(@deg);
+	-o-transform:rotateZ(@deg);
+	-ms-transform:rotateZ(@deg);
+	transform:rotateZ(@deg);
+}
+.rotate3d(@X, @Y, @Z, @angle){
+	-webkit-transform:rotate3d(@X, @Y, @Z, @angle);
+	-moz-transform:rotate3d(@X, @Y, @Z, @angle);
+	-o-transform:rotate3d(@X, @Y, @Z, @angle);
+	-ms-transform:rotate3d(@X, @Y, @Z, @angle);
+	transform:rotate3d(@X, @Y, @Z, @angle);
+}
+.border-top-radius(@radius) {
+   border-top-right-radius: @radius;
+   border-top-left-radius: @radius;
+}
+.border-right-radius(@radius) {
+  	border-bottom-right-radius: @radius;
+    border-top-right-radius: @radius;
+}
+.border-bottom-radius(@radius) {
+    border-bottom-right-radius: @radius;
+    border-bottom-left-radius: @radius;
+}
+.border-left-radius(@radius) {
+  	border-bottom-left-radius: @radius;
+    border-top-left-radius: @radius;
+}
+.linear-gradient(@x:#fbfbfb,@y:#d2d2d2){
+	background: -webkit-linear-gradient(@x, @y); 
+	background: -o-linear-gradient(@x, @y);
+	background: -moz-linear-gradient(@x, @y); 
+	background: linear-gradient(@x, @y); 
+}
+.img-md(@x:100%,@y:100%){
+	display:block;
+	position:relative;
+	width:@x;
+	height:@y;
+	img{
+		max-width: 100%;
+		max-height: 100%;
+		margin:auto;
+		position: absolute;
+		top: 0;
+		bottom: 0;
+		left: 0;
+		right:0;
+	}
+}
+//flex布局box-orient, box-direction, box-align, box-pack, box-lines.
+//默认水平，参数 vertical 垂直排列 y:reverse 反向 align:start end center baseline stretch
+//pack:start end center justify
+.flex_box(@x:horizontal,@y:normal,@align:center,@pack:justify){
+    display:-moz-box;
+    display:-webkit-box; 
+    display:-o-box; 
+    display:box;
+	-moz-box-orient:@x; 
+	-webkit-box-orient:@x; 
+	-o-box-orient:@x; 
+	box-orient:@x; 
+	-moz-box-direction:@y;
+    -webkit-box-direction:@y;
+    box-direction:@y;
+    -o-box-orient:@y; 
+    -moz-box-align:@align; 
+    -webkit-box-align:@align; 
+    -o-box-align:@align; 
+    box-align:@align; 
+    -moz-box-pack:@pack; 
+    -webkit-box-pack:@pack; 
+    -o-box-pack:@pack; 
+    box-pack:@pack; 
+}
+.list_1(){
+    -moz-box-flex: 1; 
+    -webkit-box-flex: 1; 
+    box-flex: 1;
+}
+.list_2(){
+    -moz-box-flex: 2; 
+    -webkit-box-flex: 2; 
+    box-flex: 2;
+}
+.list_3(){
+    -moz-box-flex: 3; 
+    -webkit-box-flex: 3; 
+    box-flex: 3;
+}
+.list_4(){
+    -moz-box-flex: 4; 
+    -webkit-box-flex: 4; 
+    box-flex: 4;
+}
+.list_5(){
+    -moz-box-flex: 5; 
+    -webkit-box-flex: 5; 
+    box-flex: 5;
+}
+//流布局
+.flex-flow(){
+	display:-moz-flex;
+    display:-webkit-flex; 
+    display:-o-flex; 
+    display:flex;
+	flex-wrap: wrap;  
+    -webkit-flex-wrap: wrap;
+    -moz-flex-wrap: wrap;
+    -o-flex-wrap: wrap;
+}
+
